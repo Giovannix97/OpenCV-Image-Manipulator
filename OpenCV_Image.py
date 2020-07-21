@@ -21,3 +21,17 @@ class OpenCV_Image:
         cv.imshow(title,self.image)
         cv.waitKey(0)
         cv.destroyAllWindows()
+
+    def save(self,name,extension):
+        try:
+            cv.imwrite(name + "." + extension, self.image)
+            print("Image saved successfully.")
+        except:
+            print("Error while saving image!")
+
+
+    def get_opencv_image(self):
+        return self.image
+
+    def set_opencv_image(self,opencv_image):
+        self.image = opencv_image
