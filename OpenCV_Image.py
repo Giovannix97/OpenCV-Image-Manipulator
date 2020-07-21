@@ -38,6 +38,11 @@ class OpenCV_Image:
     def set_opencv_image(self,opencv_image):
         self.image = opencv_image
 
+
+    def canny_edge_detection(self,threshold_1,threshold_2):
+        return cv.Canny(self.image, threshold_1, threshold_2)
+
+
     def show_histogram(self):
         """
             Show the color histogram for the specified image
