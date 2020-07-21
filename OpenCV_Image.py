@@ -1,4 +1,6 @@
 import cv2 as cv
+from matplotlib import pyplot as plt
+
 class OpenCV_Image:
     def __init__(self,path,mode=1):
         self.path = path
@@ -35,3 +37,17 @@ class OpenCV_Image:
 
     def set_opencv_image(self,opencv_image):
         self.image = opencv_image
+
+    def show_histogram(self):
+        """
+            Show the color histogram for the specified image
+            :param:
+            :return:
+        """
+        color = ('b', 'g', 'r')
+
+        for i, col in enumerate(color):
+            histr = cv.calcHist([self.image], [i], None, [256], [0, 256])
+            plt.plot(histr, color=col)
+            plt.xlim([0, 256])
+        plt.show()
