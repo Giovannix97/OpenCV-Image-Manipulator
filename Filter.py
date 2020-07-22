@@ -1,4 +1,3 @@
-import cv2 as cv
 from OpenCV_Image import  *
 
 class Filter:
@@ -64,4 +63,4 @@ class BilateralFilter(Filter):
         super().__init__(image,name,kernel_size)
 
     def apply(self):
-        return cv.bilateralFilter(self.image,self.diameter,self.sigma_color,self.sigma_space)
+        return cv.bilateralFilter(self.image, self.diameter, self.sigma_color, self.sigma_space)
