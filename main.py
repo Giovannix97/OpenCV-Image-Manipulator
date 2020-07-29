@@ -5,6 +5,10 @@ FOLDER_PATH = 'Images/'
 
 
 def parse_arguments():
+    """This function uses the argparse library to manage the command line options passed by the user.
+       Try to use "-h" flag to see the avaible options.
+
+    """
     my_parser = argparse.ArgumentParser(
         description="Use the Open-CV library to apply some filters and operations on a image."
                     "Place your input image inside the directory \'Image.\'\n\n"
@@ -35,29 +39,35 @@ def parse_arguments():
 
     return my_parser.parse_args()
 
+
 def show_numpy_image(image):
+    """Show the selected image in a new window."""
     cv.imshow("Your Image!", image)
     cv.waitKey(0)
     cv.destroyAllWindows()
 
+
 def main():
 
+    # Validate the arguments passed by the user.
     args = parse_arguments()
 
+    # Open the image and get the filter chosen by the user.
     input_image = OpenCV_Image(FOLDER_PATH + args.input_image, 1)
     chosen_filter = args.filter_name.lower()
 
-
     if chosen_filter == "gaussian":
-        filter = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size, args.sigma_x, args.sigma_y)  #Cambia immagine
+        filter_f  = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size,
+                                             args.sigma_x, args.sigma_y)
     elif chosen_filter == "bilateral":
-        filter = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size, args.diameter, args.sigma_color, args.sigma_space)
+        filter_f = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size,
+                                            args.diameter, args.sigma_color, args.sigma_space)
     else:
-        filter = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size)
+        filter_f = FilterFactory.get_filter(input_image.get_opencv_image(), chosen_filter, args.kernel_size)
 
-    output_image = filter.apply()
+    # Apply the filter and show the result
+    output_image = filter_f.apply()
     show_numpy_image(output_image)
-
 
 
 if __name__ == '__main__':

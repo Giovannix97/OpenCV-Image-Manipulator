@@ -9,7 +9,7 @@ class Filter:
     def get_name(self):
         return self.name
 
-    def set_name(self,new_name):
+    def set_name(self, new_name):
         self.name = new_name
 
     def get_image(self):
@@ -21,7 +21,7 @@ class Filter:
     def get_kernel_size(self):
         return self.kernel_size
 
-    def set_kernel_size(self,new_size):
+    def set_kernel_size(self, new_size):
         self.kernel_size = new_size
 
     def apply(self):
@@ -50,17 +50,18 @@ class GaussianBlur(Filter):
 
 class MedianBlur(Filter):
     def __init__(self, image, name, kernel_size):
-        super().__init__(image,name,kernel_size)
+        super().__init__(image, name, kernel_size)
 
     def apply(self):
         return cv.medianBlur(self.image, self.kernel_size)
+
 
 class BilateralFilter(Filter):
     def __init__(self, image, name, kernel_size, diameter, sigma_color, sigma_space):
         self.diameter = diameter
         self.sigma_color = sigma_color
         self.sigma_space = sigma_space
-        super().__init__(image,name,kernel_size)
+        super().__init__(image, name, kernel_size)
 
     def apply(self):
         return cv.bilateralFilter(self.image, self.diameter, self.sigma_color, self.sigma_space)
